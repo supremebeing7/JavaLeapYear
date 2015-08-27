@@ -7,4 +7,14 @@ public class ClockTimeTest {
     ClockTime app = new ClockTime();
     assertEquals((Double)0.0, app.angleDistance("12:00"));
   }
+  @Test
+  public void angleDistance_forSixOClock_oneHundredEighty() {
+    ClockTime app = new ClockTime();
+    assertEquals((Double)180.0, app.angleDistance("6:00"));
+  }
+  @Test
+  public void angleDistance_forSevenOClock_oneHundredFifty() {
+    ClockTime app = new ClockTime();
+    assertEquals((Double)150.0, app.angleDistance("07:00"));
+  }
 }
