@@ -5,18 +5,22 @@ public class ClockTime {
     String[] timeParts = time.split(":");
     Double hour = Double.parseDouble(timeParts[0]);
     Double minute = Double.parseDouble(timeParts[1]);
-    if ( minute.equals(0.0) ) {
-      return distanceForTimesOnTheHour(hour);
-    } else {
-      return 100000.0;
-    }
+    Double hourDegrees = calculateHourDegrees(hour, minute);
+    Double minuteDegrees = calculateMinuteDegrees(minute);
+    return smallerAngleOfClockFace(hourDegrees, minuteDegrees);
   }
-
-  public Double distanceForTimesOnTheHour(Double hour) {
-    if ( hour > 6 ) {
-      return 180.0 - (hour - 6) * 30;
+  public Double calculateHourDegrees(Double hour, Double minute) {
+    return hour * 30.0 + minute * 0.5;
+  }
+  public Double calculateMinuteDegrees(Double minute) {
+    return minute * 6.0;
+  }
+  public Double smallerAngleOfClockFace(Double hourDegrees, Double minuteDegrees) {
+    Double result = hourDegrees - minuteDegrees;
+    if (result < 180.0) {
+      return result;
     } else {
-      return (hour % 12) * 30;
+      return 360.0 - result;
     }
   }
 }
